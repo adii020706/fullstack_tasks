@@ -1,22 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Fonts</title>
-    <style> 
-        @font-face {
-            font-family: "HappySwirly";
-            src: url("PlaywriteBRGuides-Regular.ttf");
-        }
-        p{
-            font-family: HappySwirly;
-            text-align: center;
-            font-size: larger;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
+<style>
+    @font-face{
+        font-family: "HappySwirly";
+        src: url("PlaywriteBRGuides-Regular.ttf");
+    }
+
+    p{
+        font-family: "HappySwirly";
+        font-size: 30px;
+        text-align: center;
+    }
+
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    #myid{
+        color: red;
+    }
+
+    .myclass{
+        color: blue;
+    }
+
+    h2{
+        color: violet;
+        text-align: center;
+        font-size: 40px;
+        margin-top: 20px;
+
+    }
+    ul>li.myclass>span{
+        background-color: black;
+        color: aliceblue;
+    }
+
+    ul{
+        text-align: center;
+        list-style-type: none;
+        font-size: 30px;
+        margin-top: 20px;
+    }
+
+    input[type="email"]{
+        border-radius: 20px;
+        color:green;
+        
+    }
+
+    
+</style>
+
+
+
 <body>
-  <p>Hello World</p>  
+    <h2> CSS Selectors</h2>
+    <p>Hello World</p>
+    <ul>
+        <li class="myclass">
+            Universal
+            <span>1234</span>
+
+        </li>
+        <li id="myid">Id</li>
+        <li class="myclass">Class</li>
+        <li>Attribute</li>
+        <li>Element</li>
+        <li>Combinators</li>
+        <li>Pseudo-class</li>
+        <li>Pseudo-element</li>
+   
+    <input type="email" placeholder="Enter your email"/><br>
+    <input type="password" placeholder="Enter your password"/>  
+    </ul>
+
 </body>
 </html>
