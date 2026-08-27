@@ -43,6 +43,76 @@
         li:nth-child(2n){
             background-color: yellow;
         }
+        li:not(:hover){
+            color:red;
+        }
+        div:has(h3){
+            background-color: black;
+            color:white;
+        }
+         .moustache {
+    width: 220px;
+    height: 80px;
+    position: relative;
+    margin: 100px auto;
+}
+
+.moustache::before {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 60px;
+    background: black;
+    left: 0;
+    top: 10px;
+
+    border-radius: 0 0 70px 70px;
+
+    clip-path: polygon(
+        100% 35%,
+        85% 10%,
+        55% 20%,
+        30% 45%,
+        10% 40%,
+        0% 15%,
+        5% 55%,
+        25% 80%,
+        55% 95%,
+        85% 75%,
+        100% 55%
+    );
+
+    transform: rotate(5deg);
+}
+
+.moustache::after {
+    content: "";
+    position: absolute;
+    width: 110px;
+    height: 60px;
+    background: black;
+    right: 0;
+    top: 10px;
+
+    border-radius: 0 0 70px 70px;
+
+    clip-path: polygon(
+        0% 35%,
+        15% 10%,
+        45% 20%,
+        70% 45%,
+        90% 40%,
+        100% 15%,
+        95% 55%,
+        75% 80%,
+        45% 95%,
+        15% 75%,
+        0% 55%
+    );
+
+    transform: rotate(-5deg);
+}
+
     </style>
 </head>
 <body>
@@ -70,6 +140,13 @@
         <li>6</li>
 
     </ul>
+    <div> 
+          <p>Lorem Ipsum</p>
+    </div>
+     <div>
+        <h3>Heading</h3>
+     </div>
+         <div class="moustache"></div>
 
 </body>
 </html>
