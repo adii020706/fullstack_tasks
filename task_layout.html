@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Layout</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 150px 1fr 1fr;
+            grid-template-rows: 80px 180px 80px 60px;
+            gap: 10px;
+            padding: 10px;
+        }
+
+        .header {
+            grid-column: 1 / 4;
+            background-color: lightblue;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .sidebar {
+            grid-row: 2 / 4;
+            background-color: lightgreen;
+            text-align: center;
+            padding: 80px 10px;
+        }
+
+        .main {
+            grid-column: 2 / 4;
+            background-color: aqua;
+            text-align: center;
+            padding: 70px;
+        }
+
+        .card1 {
+            background-color: pink;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .card2 {
+            background-color: pink;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .footer {
+            grid-column: 1 / 4;
+            background-color: lightblue;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="header">
+            HEADER
+        </div>
+
+        <div class="sidebar">
+            SIDEBAR
+        </div>
+
+        <div class="main">
+            MAIN CONTENT
+        </div>
+
+        <div class="card1">
+            CARD 1
+        </div>
+
+        <div class="card2">
+            CARD 2
+        </div>
+
+        <div class="footer">
+            FOOTER
+        </div>
+
+    </div>
+
+</body>
+</html>
