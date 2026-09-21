@@ -1,0 +1,7 @@
+@import "tailwindcss";
+.heading {
+  @apply text-3xl font-bold underline text-center bg-coffee text-white p-10 rounded-lg;
+}
+@theme {
+  --color-coffee:black;
+}
