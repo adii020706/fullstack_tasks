@@ -1,67 +1,142 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reaction Timer</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 25px;
+    }
+
+    #box {
+      width: 300px;
+      height: 200px;
+      max-width: 100%;
+      border: 2px solid black;
+      background: lightgray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 22px;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+
+    #result, #best {
+      font-size: 18px;
+      margin: 15px 0;
+    }
+
+    #best {
+      font-weight: bold;
+    }
+  </style>
 </head>
+
 <body>
-  <h2>4. Reaction Timer</h2>
-  <div id="box" style="width: 300px; height: 200px; border: 2px solid black; background: lightgray; display: flex; align-items: center; justify-content: center; margin-top: 20px; cursor: pointer; user-select: none;">
-    Click to start
+
+  <div class="container">
+    <h2>4. Reaction Timer</h2>
+
+    <div id="box">Click to start</div>
+
+    <p id="result">Your reaction time will appear here.</p>
+    <p id="best">Best time: --</p>
   </div>
-  <p id="result">Your reaction time will appear here.</p>
-  <p id="best">Best time: --</p>
+
   <script>
     const box = document.getElementById('box');
     const result = document.getElementById('result');
     const best = document.getElementById('best');
-    let waiting = false;
+
+    let gameState = 'idle';
     let startTime = 0;
     let timeoutId = null;
-    let bestTime = Number(localStorage.getItem('reactionBest')) || null;
+
+    let savedTime = localStorage.getItem('reactionBest');
+    let bestTime = savedTime !== null ? Number(savedTime) : null;
+
     if (bestTime !== null) {
       best.textContent = 'Best time: ' + bestTime + ' ms';
     }
+
     function resetBox() {
+      clearTimeout(timeoutId);
       box.style.backgroundColor = 'lightgray';
       box.textContent = 'Click to start';
-      waiting = false;
+      gameState = 'idle';
     }
+
     function startGame() {
-      resetBox();
-      waiting = true;
+      gameState = 'waiting';
       box.style.backgroundColor = 'yellow';
       box.textContent = 'Wait for green...';
+
       const delay = Math.random() * 3000 + 2000;
+
       timeoutId = setTimeout(function () {
+        if (gameState !== 'waiting') {
+          return;
+        }
+
         box.style.backgroundColor = 'green';
         box.textContent = 'CLICK!';
-        startTime = new Date().getTime();
+        startTime = performance.now();
+        gameState = 'ready';
       }, delay);
     }
+
     box.addEventListener('click', function () {
-      if (!waiting) {
+      if (gameState === 'idle') {
+        result.textContent = 'Wait for the green colour!';
         startGame();
-        return;
       }
-      if (box.style.backgroundColor === 'green') {
-        const endTime = new Date().getTime();
-        const reactionTime = endTime - startTime;
+      else if (gameState === 'waiting') {
+        clearTimeout(timeoutId);
+        result.textContent = 'Too early! Try again.';
+        resetBox();
+      }
+      else if (gameState === 'ready') {
+        const endTime = performance.now();
+        const reactionTime = Math.round(endTime - startTime);
+
         result.textContent = 'Your reaction time: ' + reactionTime + ' ms';
+
         if (bestTime === null || reactionTime < bestTime) {
           bestTime = reactionTime;
           best.textContent = 'Best time: ' + bestTime + ' ms';
           localStorage.setItem('reactionBest', bestTime);
         }
-        clearTimeout(timeoutId);
-        resetBox();
-      } else {
-        result.textContent = 'Too early!';
-        clearTimeout(timeoutId);
+
         resetBox();
       }
     });
   </script>
+
 </body>
 </html>
